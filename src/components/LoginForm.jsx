@@ -23,7 +23,13 @@ const LoginForm = ({ onLogin }) => {
 
                 <Form.Group className='mb-3'>
                     <Form.Label>Contraseña</Form.Label>
-                    <Form.Control type='password' placeholder='Contraseña' value={password} onChange={(e) => setImmediate(e.target.value)} required></Form.Control>
+                    <Form.Control
+                        type='password'
+                        placeholder='Contraseña'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
                 </Form.Group>
 
                 <Button variant="primary" type="submit" className="w-100">
