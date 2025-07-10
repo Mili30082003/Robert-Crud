@@ -3,8 +3,8 @@ import { Table, Button, Modal, Form } from 'react-bootstrap'
 
 const Empleados = () => {
   const [empleados, setEmpleados] = useState([
-    { id: 1, nombre: 'Florencia', apellido: 'Solis', rol: 'cocinero' },
-    { id: 2, nombre: 'Milagros', apellido: 'Antoni', rol: 'administrador' }
+    { id: 1, nombre: 'Florencia', apellido: 'Solis', rol: 'cocinero', activo: true },
+    { id: 2, nombre: 'Milagros', apellido: 'Antoni', rol: 'administrador', activo: true }
   ])
 
   const [showModal, setShowModal] = useState(false)
@@ -37,6 +37,11 @@ const Empleados = () => {
   }
 
   const handleGuardar = () => {
+    if (!form.nombre.trim() || !form.apellido.trim() || !form.rol.trim()) {
+      alert('Por favor completa todos los campos')
+      return
+    }
+
     if (modoEdicion) {
       const empleadosActualizados = empleados.map(emp =>
         emp.id === empleadoActual.id ? { ...emp, ...form } : emp
@@ -45,18 +50,23 @@ const Empleados = () => {
     } else {
       const nuevoEmpleado = {
         ...form,
-        id: empleados.length > 0 ? empleados[empleados.length - 1].id + 1 : 1
+        id: empleados.length > 0 ? empleados[empleados.length - 1].id + 1 : 1,
+        activo: true
       }
       setEmpleados([...empleados, nuevoEmpleado])
     }
     handleClose()
   }
 
-  const handleEliminar = (id) => {
-    const confirmacion = confirm("¿Estás seguro que querés eliminar este empleado?")
-    if (confirmacion) {
-      const filtrados = empleados.filter(emp => emp.id !== id)
-      setEmpleados(filtrados)
+  const toggleActivo = (id) => {
+    setEmpleados(
+      empleados.map(emp =>
+        emp.id === id ? { ...emp, activo: !emp.activo } : emp
+      )
+    )
+    // Si estaba editando ese empleado y cambió estado, cancelar edición
+    if (empleadoActual?.id === id) {
+      handleClose()
     }
   }
 
@@ -74,35 +84,46 @@ const Empleados = () => {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Rol</th>
+            <th>Estado</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {empleados.map(emp => (
-            <tr key={emp.id}>
-              <td>{emp.id}</td>
-              <td>{emp.nombre}</td>
-              <td>{emp.apellido}</td>
-              <td>{emp.rol}</td>
-              <td>
-                <Button
-                  variant="warning"
-                  size="sm"
-                  className="me-2"
-                  onClick={() => handleShowEditar(emp)}
-                >
-                  Editar
-                </Button>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => handleEliminar(emp.id)}
-                >
-                  Eliminar
-                </Button>
+          {empleados.length > 0 ? (
+            empleados.map(emp => (
+              <tr key={emp.id} style={{ opacity: emp.activo ? 1 : 0.5 }}>
+                <td>{emp.id}</td>
+                <td>{emp.nombre}</td>
+                <td>{emp.apellido}</td>
+                <td>{emp.rol}</td>
+                <td>{emp.activo ? 'Activo' : 'Inactivo'}</td>
+                <td>
+                  <Button
+                    variant="warning"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => handleShowEditar(emp)}
+                    disabled={!emp.activo} // solo editar activos
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    variant={emp.activo ? 'danger' : 'success'}
+                    size="sm"
+                    onClick={() => toggleActivo(emp.id)}
+                  >
+                    {emp.activo ? 'Desactivar' : 'Activar'}
+                  </Button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6" style={{ textAlign: 'center' }}>
+                No hay empleados
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </Table>
 
@@ -120,6 +141,7 @@ const Empleados = () => {
                 name="nombre"
                 value={form.nombre}
                 onChange={handleChange}
+                autoFocus
               />
             </Form.Group>
 
