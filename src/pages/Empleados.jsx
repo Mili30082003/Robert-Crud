@@ -3,8 +3,8 @@ import { Table, Button, Modal, Form } from 'react-bootstrap'
 
 const Empleados = () => {
   const [empleados, setEmpleados] = useState([
-    { id: 1, nombre: 'Juan', apellido: 'Pérez', rol: 'cocinero' },
-    { id: 2, nombre: 'Ana', apellido: 'Gómez', rol: 'administrador' }
+    { id: 1, nombre: 'Florencia', apellido: 'Solis', rol: 'cocinero' },
+    { id: 2, nombre: 'Milagros', apellido: 'Antoni', rol: 'administrador' }
   ])
 
   const [showModal, setShowModal] = useState(false)
