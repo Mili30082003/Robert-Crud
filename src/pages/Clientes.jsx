@@ -11,10 +11,11 @@ const Clientes = () => {
     ])
 
     const [showModal, setShowModal] = useState(false)
-    const [modoEdicion, setModoEdicion] = usestate(false)
-    cont[clienteActual, setClienteActual] = useState(null)
-    const [form, setForm] = usestate({ nombre: '', apellido: '', direccion: '' })
-    const [busqueda, setBusqueda] = usestate('')
+   const [modoEdicion, setModoEdicion] = useState(false)
+const [clienteActual, setClienteActual] = useState(null)
+const [form, setForm] = useState({ nombre: '', apellido: '', direccion: '' })
+const [busqueda, setBusqueda] = useState('')
+
 
     const handleClose = () => {
         setShowModal(false)
