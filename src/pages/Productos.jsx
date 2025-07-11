@@ -83,7 +83,7 @@ const [showModal, setShowModal] = useState(false)
 
   return (
     <div>
-      <h2>Gestion de Productos</h2>(
+      <h2>Gestion de Productos</h2>
 
     <InputGroup className='mb-3'>
       <FormControl placeholder='Buscar por nombre o descripcion' value={busqueda} onChange={e => setBusqueda(e.target.value)}></FormControl>
