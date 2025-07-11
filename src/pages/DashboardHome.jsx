@@ -13,8 +13,8 @@ const DashboardHome = () => {
       fecha: '2025-07-11T08:30:00',
       turno: 'mañana',
       productos: [
-        { nombre: 'Producto A', cantidad: 3 },
-        { nombre: 'Producto B', cantidad: 1 }
+        { nombre: 'Producto 1', cantidad: 3 },
+        { nombre: 'Producto 2', cantidad: 1 }
       ],
       vendedorId: 1,
       total: 300,
@@ -24,8 +24,8 @@ const DashboardHome = () => {
       fecha: '2025-07-11T19:15:00',
       turno: 'noche',
       productos: [
-        { nombre: 'Producto A', cantidad: 1 },
-        { nombre: 'Producto C', cantidad: 2 }
+        { nombre: 'Producto 1', cantidad: 1 },
+        { nombre: 'Producto 2', cantidad: 2 }
       ],
       vendedorId: 2,
       total: 250,
@@ -35,7 +35,7 @@ const DashboardHome = () => {
       fecha: '2025-07-10T09:00:00',
       turno: 'mañana',
       productos: [
-        { nombre: 'Producto B', cantidad: 4 },
+        { nombre: 'Producto 2', cantidad: 4 },
       ],
       vendedorId: 1,
       total: 400,
@@ -43,8 +43,8 @@ const DashboardHome = () => {
   ])
 
   const [empleados] = useState([
-    { id: 1, nombre: 'Juan Perez' },
-    { id: 2, nombre: 'Maria Gomez' }
+    { id: 1, nombre: 'Mili Antoni' },
+    { id: 2, nombre: 'Facu Silva' }
   ])
 
   const [fechaFiltro, setFechaFiltro] = useState(new Date().toISOString().slice(0, 10))

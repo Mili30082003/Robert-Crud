@@ -7,6 +7,7 @@ import Clientes from "./pages/Clientes"
 import Pedidos from "./pages/Pedidos"
 import Productos from "./pages/Productos"
 import Reportes from "./pages/Reportes"
+import DashboardHome from "./pages/DashboardHome"
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/registro" element={<Register />} />
 
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<h2>Bienvenido al Panel Principal</h2>} />
+  <Route index element={<DashboardHome />} />
           <Route path="empleados" element={<Empleados />} />
           <Route path="clientes" element={<Clientes />} />
           <Route path="pedidos" element={<Pedidos />} />
